@@ -1,0 +1,375 @@
+/* redaction for the little essay bits */
+@font-face {
+  font-family: "Redaction 35";
+  src: url("Fonts/redaction/Redaction35-BWXjw.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ground: #3a2d25;
+  --ink: #e2dbce;
+  --soft: #b8aa98;
+  --muted: #8e7f71;
+
+  /* slightly pearly so it feels more like a real snail trail */
+  --trail: #ddd3c0;
+
+  --worm: #aa765e;
+  --sheen: rgba(255, 241, 216, 0.045);
+  --border: rgba(226, 219, 206, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Courier New", Courier, monospace;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 999;
+
+  opacity: 0.05;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.65'/%3E%3C/svg%3E");
+
+  mix-blend-mode: soft-light;
+}
+
+/* wet-ish dirt */
+.forest-scene {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 18% 25%,
+      rgba(20, 13, 10, 0.18),
+      transparent 32%
+    ),
+
+    radial-gradient(
+      ellipse at 72% 65%,
+      rgba(15, 10, 8, 0.16),
+      transparent 34%
+    ),
+
+    radial-gradient(
+      ellipse at 45% 50%,
+      rgba(255, 240, 220, 0.015),
+      transparent 30%
+    ),
+
+    var(--ground);
+}
+
+
+/* tiny dirt bits */
+.ascii-ground {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ascii-ground pre {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 11vh 7vw;
+
+  white-space: pre-wrap;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(11px, 1vw, 14px);
+  line-height: 1.7;
+
+  color: rgba(226, 219, 206, 0.14);
+}
+
+
+/* name in the corner */
+.top-note {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  right: 28px;
+
+  display: flex;
+  justify-content: flex-end;
+
+  color: var(--muted);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+
+  z-index: 4;
+}
+
+
+/* little worms moving around very slowly */
+.worm {
+  position: absolute;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+
+  color: rgba(170, 118, 94, 0.55);
+
+  pointer-events: none;
+  z-index: 2;
+
+  animation: worm-wiggle 6s ease-in-out infinite alternate;
+}
+
+.worm-one {
+  left: 18%;
+  top: 31%;
+}
+
+.worm-two {
+  right: 24%;
+  top: 57%;
+  animation-delay: -2.2s;
+}
+
+.worm-three {
+  left: 58%;
+  bottom: 19%;
+  animation-delay: -4s;
+}
+
+@keyframes worm-wiggle {
+  0% {
+    transform: translate(0, 0) rotate(-2deg);
+  }
+
+  25% {
+    transform: translate(3px, -1px) rotate(1deg);
+  }
+
+  55% {
+    transform: translate(7px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(10px, -1px) rotate(2deg);
+  }
+
+  100% {
+    transform: translate(13px, 0) rotate(0deg);
+  }
+}
+
+
+/* small hints - don't want to explain too much */
+.whisper {
+  position: absolute;
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 0.62rem;
+  letter-spacing: 0.09em;
+
+  opacity: 0.72;
+  z-index: 3;
+}
+
+.whisper-one {
+  left: 8vw;
+  top: 46vh;
+}
+
+.whisper-two {
+  right: 10vw;
+  bottom: 22vh;
+}
+
+
+/* text hiding around the dirt */
+.fragment {
+  position: absolute;
+
+  max-width: 290px;
+  margin: 0;
+
+  font-family: "Redaction 35", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.4;
+
+  color: rgba(226, 219, 206, 0.42);
+
+  z-index: 2;
+}
+
+.fragment-one {
+  left: 10vw;
+  bottom: 14vh;
+  opacity: 0.24;
+}
+
+.fragment-two {
+  right: 8vw;
+  top: 22vh;
+  opacity: 0.2;
+}
+
+.fragment-three {
+  left: 47%;
+  top: 67%;
+  opacity: 0.14;
+}
+
+
+/* bottom bits */
+.footer {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 22px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+  font-size: 0.63rem;
+
+  z-index: 4;
+}
+
+.footer a {
+  color: var(--soft);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+/* this is where the generated trails sit */
+#trail-field {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+  z-index: 10;
+}
+
+.trail-character {
+  position: absolute;
+  display: block;
+
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1;
+
+  color: var(--trail);
+
+  user-select: none;
+  pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.trail-character.visible {
+  opacity: var(--trail-opacity, 0.72);
+}
+
+.snail {
+  color: var(--trail);
+  white-space: nowrap;
+}
+
+.trail-metadata {
+  position: absolute;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 9px;
+
+  color: rgba(226, 219, 206, 0.32);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 200ms ease;
+}
+
+
+/* mobile is mostly the same, just less stuff */
+@media (max-width: 650px) {
+  .top-note {
+    top: 18px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .footer {
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
+  }
+
+  .fragment {
+    max-width: 210px;
+    font-size: 0.95rem;
+  }
+
+  .fragment-three {
+    display: none;
+  }
+
+  .whisper-one {
+    left: 7vw;
+  }
+
+  .whisper-two {
+    right: 7vw;
+  }
+
+  .trail-character {
+    font-size: 11px !important;
+  }
+}
+
+
+/* don't make worms wiggle if motion is turned off */
+@media (prefers-reduced-motion: reduce) {
+  .trail-character {
+    transition: none;
+  }
+
+  .worm {
+    animation: none;
+  }
+}
